@@ -9,30 +9,29 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
 using WebDriverManager.DriverConfigs.Impl;
 using TAFENSW.Pages;
 
 
 namespace TAFENSW.Steps
 {
+    [Binding]
     public class TAFEWebsiteTest
     {
-        [Binding]
-        public class CourseSearchSteps
-        {
-            private IWebDriver driver;
-            private WebDriverWait wait;
+        private static IWebDriver driver;
+        private static WebDriverWait wait;
 
-            public CourseSearchSteps()
+            [BeforeTestRun]
+            public static void CourseSearchSteps()
             {
                 // Set up ChromeDriver
                 driver = new ChromeDriver();
-                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
                 // open browser and maximize it
                 driver.Manage().Window.Maximize();
             }
+
 
             [Given(@"I am on the TAFE NSW website")]
             public void GivenIAmOnTheTAFENSWWebsite()
@@ -52,28 +51,28 @@ namespace TAFENSW.Steps
             public void ThenTheSearchResultsShouldDisplayTheCourse(string courseName)
             {
                 SearchResultPage searchResultPage = new SearchResultPage(driver, wait);
-                Assert.IsTrue(searchResultPage.IsCourseDisplayed(courseName));
+                Assert.IsTrue(searchResultPage.IsCourseDisplayed(courseName, wait));
             }
 
             [When(@"I apply the delivery filter as '(.*)'")]
             public void WhenIApplyTheDeliveryFilterAs(string filterOption)
             {
                 SearchResultPage searchResultPage = new SearchResultPage(driver, wait);
-                searchResultPage.ApplyDeliveryFilter(filterOption);
+                searchResultPage.ApplyDeliveryFilter(filterOption,wait);
             }
 
             [Then(@"the filter should be applied correctly to the chosen course '(.*)'")]
             public void ThenTheFilterShouldBeAppliedCorrectlyToTheChosenCourse(string filterOption)
             {
                 SearchResultPage searchResultPage = new SearchResultPage(driver, wait);
-                Assert.IsTrue(searchResultPage.IsDeliveryFilterApplied(filterOption));
+                Assert.IsTrue(searchResultPage.IsDeliveryFilterApplied(filterOption,wait));
             }
 
-            [AfterScenario]
-            public void AfterScenario()
+            [AfterTestRun]
+            public static void AfterTestRun()
             {
                 driver.Quit();
             }
-        }
+
     }
 }

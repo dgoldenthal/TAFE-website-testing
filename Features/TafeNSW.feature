@@ -12,7 +12,9 @@ Scenario: Verify course search and delivery filter functionality
     Then the filter should be applied correctly to the chosen course '<filter>'
 
 Examples:
-          | coursename                      | filter    |
-          | Advanced Barista Skills         | On Campus |
+          | coursename              | filter    |
+          | Advanced Barista Skills | On campus |
+          | Accounting              | On campus |
+          | Cyber Security          | On campus |
 
           

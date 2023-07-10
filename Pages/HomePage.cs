@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TAFENSW.Steps;
-using TAFENSW.Hooks;
 
 namespace TAFENSW.Pages
 {
@@ -25,12 +24,8 @@ namespace TAFENSW.Pages
         {
 
             // Find the search input element
-            System.Threading.Thread.Sleep(5000);
-            IWebElement searchInput = driver.FindElement(By.CssSelector("div.relative.flex-1 > input#headerSearch"));
-
-
-            // Click on the search input element
-            searchInput.Click();
+            System.Threading.Thread.Sleep(1000);
+            IWebElement searchInput = driver.FindElement(By.CssSelector("input#headerSearch"));
 
             // Enter the search query
             searchInput.SendKeys(courseName);

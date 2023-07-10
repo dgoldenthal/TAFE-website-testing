@@ -75,7 +75,9 @@ namespace TAFENSW.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify course search and delivery filter functionality")]
-        [NUnit.Framework.TestCaseAttribute("Advanced Barista Skills", "On Campus", null)]
+        [NUnit.Framework.TestCaseAttribute("Advanced Barista Skills", "On campus", null)]
+        [NUnit.Framework.TestCaseAttribute("Accounting", "On campus", null)]
+        [NUnit.Framework.TestCaseAttribute("Cyber Security", "On campus", null)]
         public void VerifyCourseSearchAndDeliveryFilterFunctionality(string coursename, string filter, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
